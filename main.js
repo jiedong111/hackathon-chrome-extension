@@ -2,9 +2,12 @@
 //Object has base and extent nodes to account for selection spanning multiple HTML elements
 //Initial work: Get highlighting to function assuming highlight is contained within single element
 //Use 
-
+deleteButton = document.querySelector('#delete-notes')
 document.addEventListener('keydown', (e) => {
     if (e.code === 'ArrowLeft') { //use left arrow for now
+      chrome.storage.local.get(function(result) {
+        console.log('storage: ', result)
+      })
       const currSelection = window.getSelection();
       let childNodesVar = currSelection.anchorNode.parentNode.childNodes
       const parentNodeVar = currSelection.anchorNode.parentNode;
@@ -38,11 +41,33 @@ document.addEventListener('keydown', (e) => {
 
       firstHalf.innerHTML = firstHalfText
       secondHalf.innerHTML = secondHalfText
+//-----------------------------------------------------------------
+      let websiteURL = window.location.hostname
 
-
-      chrome.runtime.sendMessage({greeting: newText}, function(response) {
-        //console.log(response.farewell) 
+      let storageArr;
+      chrome.storage.local.get(function(data) {
+        console.log('get request: ', data[websiteURL])
+        if (data[websiteURL] === undefined) {
+          storageArr = [];
+        } 
+        else if (data[websiteURL] !== undefined) {
+          storageArr = data[websiteURL]
+        }
+        
+        storageArr.push(newText)
+        console.log('storageArr: ', storageArr)
+  
+        let storageObj = {}
+        storageObj[websiteURL] = storageArr;
+  
+        console.log(storageObj)
+        chrome.storage.local.set(storageObj);
       })
+//------------------------------------------------------------------
+
+      // chrome.runtime.sendMessage({greeting: newText}, function(response) {
+      //   //console.log(response.farewell) 
+      // })
 
 
       let htmlElement = document.createElement('span')
@@ -95,6 +120,11 @@ document.addEventListener('keydown', (e) => {
     }
 })
 
+deleteButton.addEventListener('click', (e) => {
+  chrome.storage.local.clear()
+  const main = document.querySelector('.popup-main')
+  main.innerHTML = '';
+})
 // document.addEventListener('keydown', (e) => {
 //   if (e.code === 'ArrowLeft') { //use left arrow for now
 //       // console.log(window.getSelection()); //check if you can access window here
