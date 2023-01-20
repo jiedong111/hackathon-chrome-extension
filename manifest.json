@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Highlighter",
+  "version": "1.0",
+  "description": "A Chrome extension to help you take notes by highlighting text",
+  "browser_action": {
+      "default_popup": "popup.html"
+  },
+  "permissions": [
+      "activeTab"
+  ],
+  "content_scripts": [
+      {
+        "matches": ["http://*/*", "https://*/*"],
+        "js": ["./main.js"],
+        "css": ["./styles.css"]
+      }
+  ]
+}
