@@ -1,3 +1,20 @@
+#popup-body {
+  width:250px;
+  height: 450px;
+
+}
+
+.popup-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-title {
+
+}
+
 .highlight {
   background-color: #FFFF00;
 }

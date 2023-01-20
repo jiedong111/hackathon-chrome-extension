@@ -8,6 +8,7 @@ document.addEventListener('keydown', (e) => {
       const currSelection = window.getSelection();
       let childNodesVar = currSelection.anchorNode.parentNode.childNodes
       const parentNodeVar = currSelection.anchorNode.parentNode;
+      const newText = currSelection.toString()
 
       console.log('currSelection: ', currSelection);
       console.log('anchor node: ', currSelection.anchorNode);
@@ -37,7 +38,11 @@ document.addEventListener('keydown', (e) => {
 
       firstHalf.innerHTML = firstHalfText
       secondHalf.innerHTML = secondHalfText
-      const newText = currSelection.toString()
+
+
+      chrome.runtime.sendMessage({greeting: newText}, function(response) {
+        //console.log(response.farewell) 
+      })
 
 
       let htmlElement = document.createElement('span')
