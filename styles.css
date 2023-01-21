@@ -1,7 +1,6 @@
 #popup-body {
   width:250px;
   height: 460px;
-
 }
 
 .popup-main {
@@ -12,7 +11,11 @@
 }
 
 .popup-title {
-  margin-bottom: 0px;
+  margin: 0px;
+}
+
+.delete-button {
+  margin-bottom: 15px;
 }
 
 .highlight {

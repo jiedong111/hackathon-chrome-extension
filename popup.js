@@ -1,8 +1,10 @@
-
+const deleteButton = document.createElement('button')
 
 chrome.storage.local.get(function(data) {
   const main = document.querySelector('main')
   const newDiv = document.createElement('div')
+  deleteButton.classList.add('delete-button')
+  deleteButton.innerText = 'Delete Notes'
   for (const key in data) {
     main.innerHTML = '';
     const newTitle = document.createElement('h3');
@@ -17,6 +19,13 @@ chrome.storage.local.get(function(data) {
       newerUL.appendChild(newerLI)
     }
   }
+  main.appendChild(deleteButton)
+})
+
+deleteButton.addEventListener('click', (e) => {
+  chrome.storage.local.clear()
+  const main = document.querySelector('.popup-main')
+  main.innerHTML = '';
 })
 
 // chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {

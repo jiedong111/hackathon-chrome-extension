@@ -2,7 +2,7 @@
 //Object has base and extent nodes to account for selection spanning multiple HTML elements
 //Initial work: Get highlighting to function assuming highlight is contained within single element
 //Use 
-deleteButton = document.querySelector('#delete-notes')
+
 document.addEventListener('keydown', (e) => {
     if (e.code === 'ArrowLeft') { //use left arrow for now
       // chrome.storage.local.get(function(result) {
@@ -18,11 +18,10 @@ document.addEventListener('keydown', (e) => {
       console.log('focus node', currSelection.focusNode)
       console.log('currSelection parent node: ', currSelection.anchorNode.parentNode)
 
-      //lines 21 - 38 adds notes to popup.html/local storage---------------------------
+      //lines 21 - 35 adds notes to popup.html/local storage---------------------
       let websiteURL = window.location.hostname
       let storageArr;
       chrome.storage.local.get(function(data) {
-        // console.log('get request: ', data[websiteURL])
         if (data[websiteURL] === undefined) {
           storageArr = [];
         } 
@@ -30,13 +29,11 @@ document.addEventListener('keydown', (e) => {
           storageArr = data[websiteURL]
         }
         storageArr.push(newText)
-        // console.log('storageArr: ', storageArr)
         let storageObj = {}
         storageObj[websiteURL] = storageArr;
-        // console.log(storageObj)
         chrome.storage.local.set(storageObj);
       })
-      //------------------------------------------------------------------
+      //------------------------------------------------------------------------
 
       let numOfChildNodes = new Map();
       let count = false
