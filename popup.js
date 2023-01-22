@@ -28,6 +28,7 @@ deleteButton.addEventListener('click', (e) => {
   main.innerHTML = '';
 })
 
-//     // chrome.storage.local.get(function(result) {
-//     //   console.log(result)
-//     // })
+
+    // chrome.storage.local.get(function(result) {
+    //   console.log(result)
+    // })

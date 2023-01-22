@@ -16,7 +16,7 @@ document.addEventListener('keydown', (e) => {
       currSelectionRange.insertNode(highlightNode);
 
 
-      
+
 
       //lines 21 - 35 adds notes to popup.html/local storage
       let websiteURL = window.location.hostname
@@ -33,11 +33,6 @@ document.addEventListener('keydown', (e) => {
         storageObj[websiteURL] = storageArr;
         chrome.storage.local.set(storageObj);
       })
-
-
-        console.log('currSelectionRange', currSelectionRange)
-        console.log('workSelection', workSelection)
-        console.log('highlightNode', highlightNode)
     }
 })
 
